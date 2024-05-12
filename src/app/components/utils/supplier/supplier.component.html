@@ -1,0 +1,140 @@
+<form (submit)="onSubmit($event)">
+  <dx-toolbar [visible]="supplierReadOnly">
+    <dxi-item location="after" locateInMenu="after">
+      <dx-button
+        icon="edit"
+        text="Editar"
+        stylingMode="contained"
+        type="default"
+        (onClick)="editSupplier()"
+      ></dx-button>
+    </dxi-item>
+  </dx-toolbar>
+  <dx-form
+    id="form"
+    [ngClass]="{
+      'view-mode': supplierReadOnly,
+      'plain-styled-form': true
+    }"
+    [readOnly]="supplierReadOnly"
+  >
+    <dxi-item
+      itemType="group"
+      *ngFor="let SupplierId of supplierIdOptions; let i = index"
+    >
+      <dxi-item itemType="group" name="Supplier" [colCount]="2">
+        <dxi-item
+          [dataField]="'Suppliers[' + i + '].SupplierId'"
+          [editorType]="'dxSelectBox'"
+          [editorOptions]="SupplierId"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Campo obligatorio"
+          ></dxi-validation-rule>
+          <dxo-label [text]="'Proveedor Principal ' + (i + 1)"> </dxo-label>
+        </dxi-item>
+        <dxi-item
+          [dataField]="'Suppliers[' + i + '].nit'"
+          [editorType]="'dxTextBox'"
+          [editorOptions]="supplierNitOptions[i]"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Campo obligatorio"
+          ></dxi-validation-rule>
+          <dxo-label  [text]="'Nit'"> </dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item itemType="group" name="Supplier" [colCount]="6">
+        <dxi-item
+          [dataField]="'Suppliers[' + i + '].regime'"
+          [editorType]="'dxSelectBox'"
+          [editorOptions]="regimeIdOptions[i]"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Campo obligatorio"
+          ></dxi-validation-rule>
+          <dxo-label [visible]="false" [text]="'Regimen'"> </dxo-label>
+        </dxi-item>
+        <dxi-item
+          [dataField]="'Suppliers[' + i + '].CountryId'"
+          [editorType]="'dxSelectBox'"
+          [editorOptions]="countryIdOptions[i]"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Campo obligatorio"
+          ></dxi-validation-rule>
+          <dxo-label [visible]="false" [text]="'Pais'"> </dxo-label>
+        </dxi-item>
+        <dxi-item
+          [dataField]="'Suppliers[' + i + '].DepartmentId'"
+          [editorType]="'dxSelectBox'"
+          [editorOptions]="departmentIdOptions[i]"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Campo obligatorio"
+          ></dxi-validation-rule>
+          <dxo-label [visible]="false" [text]="'Departamento'"> </dxo-label>
+        </dxi-item>
+        <dxi-item
+          [dataField]="'Suppliers[' + i + '].City'"
+          [editorType]="'dxSelectBox'"
+          [editorOptions]="cityIdOptions[i]"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Campo obligatorio"
+          ></dxi-validation-rule>
+          <dxo-label [visible]="false" [text]="'Ciudad'"> </dxo-label>
+        </dxi-item>
+        <dxi-item
+          [dataField]="'Suppliers[' + i + '].phone'"
+          [editorType]="'dxTextBox'"
+          [editorOptions]="supplierPhoneOptions[i]"
+        >
+          <dxi-validation-rule
+            type="required"
+            message="Campo obligatorio"
+          ></dxi-validation-rule>
+          <dxo-label [visible]="false" [text]="'Telefono'"> </dxo-label>
+        </dxi-item>
+        <dxi-item
+        [dataField]="'Suppliers[' + i + '].email'"
+        [editorType]="'dxTextBox'"
+        [editorOptions]="supplierEmailOptions[i]"
+      >
+        <dxi-validation-rule
+          type="required"
+          message="Campo obligatorio"
+        ></dxi-validation-rule>
+        <dxo-label [visible]="false" [text]="'Correo'"> </dxo-label>
+      </dxi-item>
+      </dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group">
+      <dxi-item
+        itemType="button"
+        horizontalAlignment="left"
+        [buttonOptions]="newButtonOptions"
+        [visible]="!supplierReadOnly"
+      >
+      </dxi-item>
+    </dxi-item>
+    <dxi-item
+      itemType="group"
+      horizontalAlignment="left"
+      [colCount]="2"
+      [visible]="!supplierReadOnly && supplierIdOptions.length > 0"
+    >
+      <dxi-item itemType="button" [buttonOptions]="saveButtonOptions">
+      </dxi-item>
+      <dxi-item itemType="button" [buttonOptions]="cancelButtonOptions">
+      </dxi-item>
+    </dxi-item>
+  </dx-form>
+</form>
